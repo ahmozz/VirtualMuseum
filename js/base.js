@@ -92,8 +92,11 @@ function creerText(description,largeur,hauteur){
 // Création de sources
 // ===================
 
-function creerSourcePonctuelle(couleur, intensite, portee, attenuation){
-	var light = new THREE.PointLight(couleur,intensite,portee,attenuation) ; 
+function creerSourcePonctuelle(position, couleur, intensite, portee, attenuation){
+	var light = new THREE.PointLight(couleur,intensite,portee,attenuation) ;
+	if(null!=position){
+		light.position.copy(position);
+	}
 	return light ; 
 }
 

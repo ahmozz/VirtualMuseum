@@ -96,20 +96,25 @@ function parser(){
 			var materiau = creerLambertTexture(params.image,colorier(params.couleur),nx, ny) ;
 			console.log("Lambert texturé : ",materiau) ;
 			enregistrerDansAnnuaire(nom, materiau) ;
-		} else
-		if(_obj.type == "soleil"){
+		} else if(_obj.type == "soleil"){
 			var soleil = creerSoleil() ;
 			enregistrerDansAnnuaire(nom, soleil) ;
-		} else
-		if(_obj.type == "ampoule"){
+		} else if(_obj.type == "ampoule"){
 			var couleur     = colorier(params.couleur) || 0xffffff ;
 			var intensite   = params.intensite || 1.0 ;
 			var portee      = params.portee || 3.0 ;
 			var attenuation = params.attenuation || 1.0 ;
-			var ampoule = creerSourcePonctuelle(couleur, intensite, portee, attenuation) ;
+			var ampoule = creerSourcePonctuelle(null, couleur, intensite, portee, attenuation) ;
 			enregistrerDansAnnuaire(nom, ampoule) ;
-		} else
-		if(_obj.type == "audio"){
+		} else if(_obj.type == "light"){
+			var couleur     = colorier(params.couleur) || 0xffffff ;
+			var intensite   = params.intensite || 1.0 ;
+			var portee      = params.portee || 3.0 ;
+			var attenuation = params.attenuation || 1.0 ;
+			var light = new THREE.DirectionalLight(couleur, intensite) ;
+			enregistrerDansAnnuaire(nom, light) ;
+		}
+		else if(_obj.type == "audio"){
 			var loop        = params.loop     || false ;
 			var volume      = params.volume   || 1.0 ;
 			var distance    = params.distance || 20.0 ;
@@ -126,16 +131,25 @@ function parser(){
 		_act = actions[i] ;
 		var objet  = chercherDansAnnuaire(_act.objet) ;
 		var fonc   = _act.fonc ;
+		var opt = _act.opt;
 		var params = _act.params ;
 
 		if(fonc == "placerXYZ"){
 			objet.position.set(params.x, params.y, params.z) ;
+			if(opt != undefined && opt=="addBulb"){
+				var couleur     = 0xffffff ;
+				var intensite   = 20.0 ;
+				var portee      = 5.0 ;
+				var attenuation = 2.0;
+
+				var ampoule = creerSourcePonctuelle(new THREE.Vector3(params.x+8, params.y+2, params.z+3), couleur, intensite, portee, attenuation);
+				objet.add(ampoule)
+			}
 		} else
 		if(fonc == "orienterY"){
 			objet.rotation.y = params.angle ;
 		}
 	}
-
 
 	for(var i=0; i<relations.length; i++){
 		_rel = relations[i] ;
@@ -147,7 +161,6 @@ function parser(){
 			sujet.add(objet) ;
 		}
 	}
-
 
 
 }

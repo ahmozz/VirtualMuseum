@@ -3,7 +3,8 @@
 
 
 			{"type":"soleil" , "nom":"soleil"    , "params":{}},
-			{"type":"ampoule", "nom":"ampoule01" , "params":{"couleur":"rouge","intensite":2.0,"portee":5.0,"attenuation":2.0}},
+			{"type":"ampoule", "nom":"ampoule01" , "params":{"couleur":"bleu","intensite":5.0,"portee":90.0,"attenuation":2.0}},
+			{"type":"light", "nom":"directLight" , "params":{"couleur":"white","intensite":3.0}},
 
 			{"type":"lambert", "nom":"materiauBleu","params":{"couleur":"bleu"}},
 			{"type":"lambert", "nom":"materiauBlanc","params":{"couleur":"blanc"}},
@@ -296,7 +297,8 @@
 
 		    ],
 	"actions" : [
-			{"fonc":"placerXYZ", "objet":"ampoule01", "params":{"x":1, "y":3,"z":3}},
+			{"fonc":"placerXYZ", "objet":"ampoule01", "params":{"x":30, "y":10,"z":20}},
+			{"fonc":"placerXYZ", "objet":"directLight", "params":{"x":30, "y":10,"z":20}},
 
 			{"fonc":"orienterY", "objet":"gr01", "params":{"angle":0.785398163}},
 			{"fonc":"placerXYZ", "objet":"gr01", "params":{"x":-2, "y":-0.5,"z":3}},
@@ -337,8 +339,8 @@
 			{"fonc":"placerXYZ", "objet":"flowersGround3_1", "params":{"x":14, "y":0.002,"z":-14}},
 			{"fonc":"placerXYZ", "objet":"flowersGround4_1", "params":{"x":8, "y":0.002,"z":-14}},
 
-			{"fonc":"placerXYZ", "objet":"poster01", "params":{"x":-11, "y":-1.5,"z":0.15}},
-			{"fonc":"placerXYZ", "objet":"poster02", "params":{"x":-6, "y":-1.5,"z":0.15}},
+			{"fonc":"placerXYZ", "objet":"poster01", "opt": "addBulb", "params":{"x":-11, "y":-1.5,"z":0.2}},
+			{"fonc":"placerXYZ", "objet":"poster02", "opt": "addBulb", "params":{"x":-6, "y":-1.5,"z":0.15}},
 
 			{"fonc":"placerXYZ", "objet":"cloison03", "params":{"x":0.0, "y":3.0,"z":10}},
 			{"fonc":"placerXYZ", "objet":"cloison04", "params":{"x":-8.5, "y":0.0,"z":10}},
@@ -381,6 +383,7 @@
 	"relations" : [
 			{"rel":"parentDe","sujet":"scene","objet":"soleil"},
 			{"rel":"parentDe","sujet":"scene","objet":"ampoule01"},
+			{"rel":"parentDe","sujet":"scene","objet":"directLight"},
 			{"rel":"parentDe","sujet":"scene","objet":"sph01"},
 
 			{"rel":"parentDe","sujet":"gr01","objet":"sph02"},
