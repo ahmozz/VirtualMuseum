@@ -93,11 +93,11 @@
 			//var listener = new THREE.AudioListener() ; 
 			//camera.add(listener) ; 
 
-    			var geo = new THREE.BoxGeometry(2,2,2) ; 
+			/*var geo = new THREE.BoxGeometry(2,2,2) ;
 			var material = new THREE.MeshNormalMaterial() ;
 			var cube = new THREE.Mesh(geo,material) ;
 			cube.position.set(0,3,0) ;   
-			scene.add(cube) ; 
+			scene.add(cube);*/
 
 
 
@@ -108,10 +108,14 @@
 
 
 			//scene.add(creerSoleil()) ;
-			pointeur = creerSphere("pointeur",0.05,16,materiauRouge) ; 
-			scene.add(pointeur) ; 
+			//pointeur = creerSphere("pointeur",0.05,16,materiauRouge) ;
+			//scene.add(pointeur) ;
 
 			//parser() ;
+
+			var light = new THREE.AmbientLight( 0x606060); // soft white light
+			scene.add(light)
+
 			chargerDocument() ;  
 			console.log("Fin de création de la scène") ; 
 		}
